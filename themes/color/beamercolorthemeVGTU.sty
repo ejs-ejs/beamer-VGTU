@@ -1,0 +1,226 @@
+% VGTU color pallete for beamer
+% based on Whale
+% Copyright 2014 by Eugenijus Januskevicius
+%
+% original copyright by:
+% Copyright 2007 by Till Tantau
+%
+% This file may be distributed and/or modified
+%
+% 1. under the LaTeX Project Public License and/or
+% 2. under the GNU Public License.
+%
+% See the file doc/licenses/LICENSE for more details.
+
+\ProvidesPackageRCS $Header: /Users/ejs/Documents/LaTeX/beamer/base/themes/color/beamercolorthemeVGTU.sty,v d02a7cf4d8ae 2010/06/17 09:11:41 rivanvx $
+
+\definecolor{VGTUblue}{RGB}{0,49,92}
+\definecolor{VGTUgray}{RGB}{140,141,143}
+\definecolor{VGTUlightGray}{RGB}{232,232,232}
+\definecolor{VGTUorange}{RGB}{247,150,71} % white theme
+\definecolor{VGTUpaleRed}{RGB}{192,80,78} % white theme
+\definecolor{VGTUolive}{RGB}{155,187,88} % white theme
+\definecolor{VGTUmagenta}{RGB}{128,100,161} % white theme
+\definecolor{VGTUpaleBlue}{RGB}{79,129,188} % white theme
+
+\newif\if@langLT
+\@langLTfalse
+\DeclareOption{LT}{\@langLTtrue} % lietuviskas fonas
+\DeclareOption{lt}{\@langLTtrue} % lietuviskas fonas
+\newif\if@langEN
+\@langENfalse
+\DeclareOption{EN}{\@langENtrue} % English background
+\DeclareOption{en}{\@langENtrue} % English background
+
+\newif\if@cWhite
+\@cWhitefalse
+\DeclareOption{white}{\@cWhitetrue}
+\DeclareOption{White}{\@cWhitetrue} % white colortheme
+
+\newif\if@cGrey
+\@cGreyfalse
+\DeclareOption{gray}{\@cGreytrue}
+\DeclareOption{Gray}{\@cGreytrue} % grey colortheme
+
+\newif\if@cBlue
+\@cBluefalse
+\DeclareOption{blue}{\@cBluetrue}
+\DeclareOption{Blue}{\@cBluetrue} % blue colortheme
+
+\ExecuteOptions{white,lt}
+\ProcessOptions
+
+\if@langEN
+ \@langLTfalse
+\fi
+
+\if@cGrey
+ \@cBluefalse
+ \@cWhitefalse
+\fi
+
+\if@cBlue
+ \@cGreyfalse
+ \@cWhitefalse
+\fi
+
+\if@cWhite
+ \@cBluefalse
+ \@cGreyfalse
+\fi
+
+\mode<presentation>
+
+\if@cBlue
+	\setbeamercolor*{palette primary}{fg=white,bg=VGTUblue!90!black}
+	\setbeamercolor*{palette secondary}{fg=VGTUlightGray,bg=VGTUblue}
+	\setbeamercolor*{palette tertiary}{fg=white,bg=VGTUblue!50!black}
+	\setbeamercolor*{palette quaternary}{fg=white,bg=VGTUblue}
+
+	\setbeamercolor*{sidebar}{bg=VGTUblue}
+	\setbeamercolor*{palette sidebar primary}{bg=VGTUblue!10}
+	\setbeamercolor*{palette sidebar secondary}{bg=VGTUblue!30}
+	\setbeamercolor*{palette sidebar tertiary}{bg=VGTUblue!50}
+	\setbeamercolor*{palette sidebar quaternary}{bg=VGTUblue!70}
+	
+	\setbeamercolor*{navigation symbols dimmed}{parent=palette secondary, fg=VGTUgray}
+    \setbeamercolor*{navigation symbols}{parent=palette primary, fg=VGTUlightGray}
+
+	\setbeamercolor*{titlelike}{parent=palette primary}
+
+	\setbeamercolor*{separation line}{}
+	\setbeamercolor*{fine separation line}{}
+
+	\setbeamercolor*{normal text}{fg=white}
+
+	\setbeamercolor*{itemize item}{fg=VGTUorange}
+	\setbeamercolor*{itemize subitem}{fg=VGTUorange}
+		\setbeamercolor*{itemize subsubitem}{fg=VGTUorange}
+
+	\setbeamercolor*{description item}{fg=VGTUorange}
+	
+	\setbeamercolor*{normal text}{parent=palette primary, fg=white}
+	\setbeamercolor*{normal text in math text}{parent=palette primary, fg=white}
+
+	%Global Background must be put in preamble
+	\usebackgroundtemplate{
+		\ifnum\c@framenumber=1
+			% On title page
+			\if@langLT
+				\includegraphics[width=\paperwidth,height=\paperheight]{VGTU_blue_1_LT.jpg}
+			\fi
+			\if@langEN
+				\includegraphics[width=\paperwidth,height=\paperheight]{VGTU_blue_1_EN.jpg}
+			\fi
+		\else
+            % Other frames background
+			\if@langLT
+				\includegraphics[width=\paperwidth,height=\paperheight]{VGTU_blue_2_LT.jpg}
+			\fi%
+			\if@langEN
+				\includegraphics[width=\paperwidth,height=\paperheight]{VGTU_blue_2_EN.jpg}
+			\fi%
+		\fi%
+		}
+\fi%
+% end of blue color theme	
+\if@cGrey
+	\setbeamercolor*{palette primary}{fg=white,bg=VGTUgray!75}
+	\setbeamercolor*{palette secondary}{fg=white,bg=VGTUblue!50!gray}
+	\setbeamercolor*{palette tertiary}{fg=white,bg=VGTUgray!25!black}
+	\setbeamercolor*{palette quaternary}{fg=white,bg=VGTUgray}
+
+	\setbeamercolor*{sidebar}{bg=VGTUgray}
+  
+	\setbeamercolor*{palette sidebar primary}{parent=palette primary, fg=VGTUblue!10, bg=VGTUgray!10}
+	\setbeamercolor*{palette sidebar secondary}{parent=palette primary, fg=VGTUblue!30, bg=VGTUgray!30}
+	\setbeamercolor*{palette sidebar tertiary}{parent=palette primary, fg=VGTUblue!50, bg=VGTUgray!50}
+	\setbeamercolor*{palette sidebar quaternary}{parent=palette primary, fg=VGTUblue!70, bg=VGTUgray!70}
+	
+	\setbeamercolor*{navigation symbols dimmed}{parent=palette secondary, fg=VGTUgray}
+    \setbeamercolor*{navigation symbols}{parent=palette primary, fg=VGTUblue!50!gray}
+
+
+	\setbeamercolor*{titlelike}{parent=palette primary}
+
+	\setbeamercolor*{separation line}{}
+	\setbeamercolor*{fine separation line}{}
+
+	\setbeamercolor*{normal text}{parent=palette primary, fg=VGTUblue}
+	\setbeamercolor*{normal text in math text}{parent=palette primary, fg=VGTUblue}
+
+
+	%Global Background must be put in preamble
+	\usebackgroundtemplate{
+		\ifnum\c@framenumber=1
+			% On title page
+			\if@langLT
+				\includegraphics[width=\paperwidth,height=\paperheight]{VGTU_gray_1_LT.jpg}
+			\fi
+			\if@langEN
+				\includegraphics[width=\paperwidth,height=\paperheight]{VGTU_gray_1_EN.jpg}
+			\fi
+		\else
+            % Other frames background
+			\if@langLT
+				\includegraphics[width=\paperwidth,height=\paperheight]{VGTU_gray_2_LT.jpg}
+			\fi%
+			\if@langEN
+				\includegraphics[width=\paperwidth,height=\paperheight]{VGTU_gray_2_EN.jpg}
+			\fi%
+		\fi%
+		}
+\fi%	
+% end of grey color theme
+
+\if@cWhite
+	\setbeamercolor*{palette primary}{fg=white,bg=VGTUgray}
+	\setbeamercolor*{palette secondary}{fg=VGTUblue,bg=VGTUlightGray}
+	\setbeamercolor*{palette tertiary}{fg=white,bg=VGTUgray!50!black}
+	\setbeamercolor*{palette quaternary}{fg=white,bg=black}
+
+	\setbeamercolor*{sidebar}{bg=VGTUblue}
+  
+	\setbeamercolor*{palette sidebar primary}{parent=palette primary, fg=VGTUblue!10, bg=VGTUgray!10}
+	\setbeamercolor*{palette sidebar secondary}{parent=palette primary, fg=VGTUblue!30, bg=VGTUgray!30}
+	\setbeamercolor*{palette sidebar tertiary}{parent=palette primary, fg=VGTUblue!50, bg=VGTUgray!50}
+	\setbeamercolor*{palette sidebar quaternary}{parent=palette primary, fg=VGTUblue!70, bg=VGTUgray!70}
+	
+	\setbeamercolor*{navigation symbols dimmed}{parent=palette secondary, fg=VGTUgray}
+    \setbeamercolor*{navigation symbols}{parent=palette primary, fg=VGTUblue}
+
+	\setbeamercolor*{titlelike}{parent=palette primary}
+
+	\setbeamercolor*{separation line}{}
+	\setbeamercolor*{fine separation line}{}
+
+	\setbeamercolor*{normal text}{fg=VGTUblue}
+
+
+
+	%Global Background must be put in preamble
+	\usebackgroundtemplate{
+		\ifnum\c@framenumber=1
+			% On title page
+			\if@langLT
+				\includegraphics[width=\paperwidth,height=\paperheight]{VGTU_white_1_LT.jpg}
+			\fi
+			\if@langEN
+				\includegraphics[width=\paperwidth,height=\paperheight]{VGTU_white_1_EN.jpg}
+			\fi
+		\else
+            % Other frames background
+			\if@langLT
+				\includegraphics[width=\paperwidth,height=\paperheight]{VGTU_white_2_LT.jpg}
+			\fi%
+			\if@langEN
+				\includegraphics[width=\paperwidth,height=\paperheight]{VGTU_white_2_EN.jpg}
+			\fi%
+		\fi%
+		}
+\fi%	
+% end of white color theme
+
+
+\mode
+<all>

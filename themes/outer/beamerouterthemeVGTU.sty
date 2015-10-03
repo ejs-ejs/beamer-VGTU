@@ -1,0 +1,178 @@
+% Copyright 2007 by Till Tantau
+%
+% This file may be distributed and/or modified
+%
+% 1. under the LaTeX Project Public License and/or
+% 2. under the GNU Public License.
+%
+% See the file doc/licenses/LICENSE for more details.
+
+\ProvidesPackageRCS $Header: /Users/joseph/Documents/LaTeX/beamer/base/themes/outer/beamerouterthemeVGTU.sty,v d02a7cf4d8ae 2010/06/17 09:11:41 rivanvx $
+
+
+\newif\ifbeamer@sb@subsection
+
+\DeclareOptionBeamer{subsection}[true]{\csname beamer@sb@subsection#1\endcsname}
+\ExecuteOptionsBeamer{subsection=true}
+\ProcessOptionsBeamer
+
+%% The \module command
+%%
+%%
+%\newcommand{\module}{\@dblarg\beamer@module}
+%\long\def\beamer@module[#1]#2{%
+%  \def\insertmodule{#2}%
+%  \def\beamer@moduleID{#1}%
+%  }
+%\module{}
+%
+%\newcommand\insertmodule[1][]{%
+%  \let\thanks=\@gobble%
+%  \beamer@setupshort{#1}%
+%  \beamer@insertshort{\beamer@insertmodule}%
+
+
+\mode<presentation>
+
+\setbeamercolor{title}{parent=palette secondary}
+\setbeamercolor{date}{parent=palette secondary}
+\setbeamercolor{frametitle}{parent=palette primary}
+\setbeamercolor{subsection in head/foot}{parent=palette quaternary}
+\setbeamercolor{section in head/foot}{parent=palette tertiary}
+
+
+\beamer@compresstrue
+
+\AtBeginDocument{
+  {
+    \usebeamerfont*{headline}
+    \colorlet{global.bg}{bg}
+    \usebeamercolor{subsection in head/foot}
+    \usebeamercolor{section in head/foot}
+    \usebeamercolor{frametitle}
+
+    \ifbeamer@sb@subsection
+      \pgfdeclareverticalshading{beamer@barshade}{\the\paperwidth}{%
+         color(0ex)=(global.bg);%
+         color(1ex)=(subsection in head/foot.bg);%
+         color(3.25ex)=(subsection in head/foot.bg);%
+         color(4.25ex)=(section in head/foot.bg);%
+         color(9.75ex)=(section in head/foot.bg)%
+       }
+       \pgfdeclareverticalshading{beamer@aboveframetitle}{\the\paperwidth}{%
+         color(0ex)=(frametitle.bg);%
+         color(1ex)=(frametitle.bg);%
+         color(2ex)=(subsection in head/foot.bg)
+       }
+    \else
+      \pgfdeclareverticalshading{beamer@barshade}{\the\paperwidth}{%
+         color(0ex)=(global.bg);%
+         color(1ex)=(section in head/foot.bg);%
+         color(7ex)=(section in head/foot.bg)%
+       }
+     \pgfdeclareverticalshading{beamer@aboveframetitle}{\the\paperwidth}{%
+         color(0ex)=(frametitle.bg);%
+         color(1ex)=(frametitle.bg);%
+         color(2ex)=(section in head/foot.bg)
+       }
+    \fi  
+
+    \pgfdeclareverticalshading{beamer@belowframetitle}{\the\paperwidth}{%
+      color(0ex)=(global.bg);%
+      color(1ex)=(frametitle.bg)
+    }
+  }
+}
+
+                                % Head
+\defbeamertemplate*{headline}{smoothbars theme}
+{%
+ % \pgfuseshading{beamer@barshade}%
+ \ifnum\c@framenumber=1
+     % On title page
+	 \ifbeamer@sb@subsection%
+        \vskip-9.75ex%
+      \else%
+        \vskip-10em%
+      \fi%
+	\else
+      \ifbeamer@sb@subsection%
+        \vskip-9.75ex%
+      \else%
+        \vskip-7ex%
+      \fi%
+  \fi%
+  %
+  \begin{beamercolorbox}[ignorebg,leftskip=3cm,rightskip=1cm,ht=2.25ex,dp=3.75ex]{section in head/foot}
+  % \begin{beamercolorbox}[leftskip=3cm,ht=2.25ex,dp=3.75ex]{section in head/foot}
+    \insertnavigation{\paperwidth}
+  \end{beamercolorbox}%
+  \ifbeamer@sb@subsection%
+    \begin{beamercolorbox}[ignorebg,ht=2.125ex,dp=1.125ex,%
+      leftskip=.3cm,rightskip=.3cm plus1fil]{subsection in head/foot}
+      \usebeamerfont{subsection in head/foot}\insertsubsectionhead
+    \end{beamercolorbox}%
+  \fi%
+}%
+
+
+
+\defbeamertemplate*{title page}{customized}[1][]
+{
+\vskip24ex%
+\begin{columns}
+   \column{0.3\paperwidth}
+    \column{0.7\paperwidth}
+	
+	\begin{beamercolorbox}[wd=\textwidth,leftskip=0cm,rightskip=1em plus1fil,vmode]{title}
+    \usebeamerfont*{title}\flushright{\inserttitle\hspace*{.5em}}%
+	\usebeamerfont{subtitle}\usebeamercolor[fg]{subtitle}\flushright{\insertsubtitle\hspace*{.5em}}
+	\end{beamercolorbox}%
+	\vskip2ex
+	\usebeamerfont{author}\insertauthor\par
+    \usebeamerfont{institute}\insertinstitute\par
+	\vskip6pt
+	\begin{beamercolorbox}[wd=\textwidth,leftskip=0cm,rightskip=1em]{date}
+		\vskip-8pt
+		\usebeamerfont{date}\flushleft{\hspace*{.5em}\insertdate\par}
+	\end{beamercolorbox}%
+\end{columns}
+}
+
+
+\defbeamertemplate*{frametitle}{smoothbars theme}
+{%
+  \nointerlineskip%
+  \usebeamerfont{headline}%
+  %\begin{beamercolorbox}[wd=\paperwidth,ht=1.5ex,dp=0ex,vmode]{empty}
+  %  \pgfuseshading{beamer@aboveframetitle}%
+  %\end{beamercolorbox}%
+  \vskip.055\paperheight%
+  %\nointerlineskip%
+  %\hskip{4cm}
+  
+  \begin{columns}
+   \column{0.3\paperwidth}
+    \column{0.7\paperwidth}
+   \begin{beamercolorbox}[wd=\textwidth,leftskip=0cm,rightskip=1em plus1fil,vmode]{frametitle}
+    \usebeamerfont*{frametitle}\vskip.45em\flushright{\insertframetitle\hspace*{1em}}%
+      \ifx\insertframesubtitle\@empty%
+        \strut\par%
+      \else
+        \par{\usebeamerfont*{framesubtitle}\usebeamercolor[fg]{framesubtitle}\insertframesubtitle}\hspace*{1em}
+      \fi%%
+    \usebeamerfont{headline}%
+    \vskip.5ex  
+  \end{beamercolorbox}%
+  \end{columns}
+
+
+  \nointerlineskip
+  %\begin{beamercolorbox}[wd=\paperwidth,ht=.5ex,dp=0ex]{empty}
+  %  \pgfuseshading{beamer@belowframetitle}%
+  %\end{beamercolorbox}%
+}
+  
+  
+\mode
+<all>
